@@ -7,35 +7,42 @@ namespace api_net_csharp_rest_webapi.Services
         TareasContext context;
 
         public TareaService(
-            TareasContext _context        
-        ){
+            TareasContext _context
+        )
+        {
             context = _context;
         }
 
         //[GET]
-        public IEnumerable<Tarea> Get() {
+        public IEnumerable<Tarea> Get()
+        {
             return context.Tareas;
         }
 
         //[INSERT]
-        public async Task Save(Tarea objRow) {
+        public async Task Save(Tarea objRow)
+        {
             context.Tareas.Add(objRow);
             await context.SaveChangesAsync();
         }
 
         //[DELTE]
-        public async Task Remove(Guid id) {
+        public async Task Remove(Guid id)
+        {
             var objRowActual = context.Tareas.Find(id);
-            if (objRowActual != null) {
+            if (objRowActual != null)
+            {
                 context.Remove(objRowActual);
-                await context.SaveChangesAsync();   
+                await context.SaveChangesAsync();
             }
         }
 
         //UPDATE
-        public async Task Update(Guid id, Tarea objRow) {
+        public async Task Update(Guid id, Tarea objRow)
+        {
             var objRowActual = context.Tareas.Find(id);
-            if (objRowActual != null) {
+            if (objRowActual != null)
+            {
                 objRowActual.Titulo = objRow.Titulo;
                 objRowActual.Descripcion = objRow.Descripcion;
 
@@ -44,7 +51,8 @@ namespace api_net_csharp_rest_webapi.Services
         }
     }
 
-    public interface ITareaService {
+    public interface ITareaService
+    {
         IEnumerable<Tarea> Get();
         Task Save(Tarea objRow);
         Task Remove(Guid id);
